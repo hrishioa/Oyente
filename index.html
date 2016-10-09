@@ -1,36 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>Oyente by hrishioa</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">Oyente</h1>
-        <p class="header">Smart Contract analysis tool</p>
+    <section class="page-header">
+      <h1 class="project-name">Oyente</h1>
+      <h2 class="project-tagline">Smart Contract analysis tool</h2>
+      <a href="https://github.com/hrishioa/Oyente" class="btn">View on GitHub</a>
+      <a href="https://github.com/hrishioa/Oyente/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/hrishioa/Oyente/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/hrishioa/Oyente/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/hrishioa/Oyente/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/hrishioa/Oyente">View On GitHub</a></li>
-        </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/hrishioa">hrishioa</a></p>
-
-
-      </header>
-      <section>
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="oyente" class="anchor" href="#oyente" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Oyente</h1>
 
 <p><strong>Note: The tool is currently under development, please report any bugs you may find.</strong></p>
@@ -49,6 +38,57 @@
 <p><code>cd /home/oyente/oyente &amp;&amp; source ../dependencies/venv/bin/activate &amp;&amp; python oyente.py greeter.sol</code></p>
 
 <p>and you are done!</p>
+
+<h2>
+<a id="benchmarks" class="anchor" href="#benchmarks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Benchmarks</h2>
+
+<p>To run the benchmarks, the fastest way is to use the docker image.</p>
+
+<p>The blockchain snapshot is in <code>contract_data</code> and the benchmark results are in <code>benchmarks/results.json</code>. The benchmarks were run using a 5-minute timeout - using a longer timeout will give fewer incomplete executions.</p>
+
+<p>In the container, run <code>batch_run.py</code> after activating the virtualenv. Results are in <code>results.json</code> once the benchmark completes.</p>
+
+<p>The benchmarks take a long time and a <em>lot</em> of RAM in any but the largest of clusters, beware.</p>
+
+<h3>
+<a id="benchmark-results" class="anchor" href="#benchmark-results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Benchmark Results</h3>
+
+<table>
+<thead>
+<tr>
+<th>Bug</th>
+<th align="left">Occurrences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Callstack Bug</td>
+<td align="left">4792</td>
+</tr>
+<tr>
+<td>Reentrancy</td>
+<td align="left">3742</td>
+</tr>
+<tr>
+<td>Time Dependancy</td>
+<td align="left">165</td>
+</tr>
+<tr>
+<td>Concurrency</td>
+<td align="left">490</td>
+</tr>
+<tr>
+<td>Total</td>
+<td align="left">11839</td>
+</tr>
+<tr>
+<td>(Timeout)</td>
+<td align="left">5715</td>
+</tr>
+</tbody>
+</table>
+
+<p><em>The results are different from those in the paper. This is an improved version of the tool, with fewer exceptions.</em> </p>
 
 <h2>
 <a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h2>
@@ -87,16 +127,6 @@
 <code>transaction_scrape.py</code> - Contains functions to retrieve up-to-date transaction information for a particular contract.</li>
 </ol>
 
-<h2>
-<a id="benchmarks" class="anchor" href="#benchmarks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Benchmarks</h2>
-
-<p>Note: This is an improved version of the tool used for the paper. Benchmarks are not for direct comparison.</p>
-
-<p>To run the benchmarks, it is best to use the docker container as it includes the blockchain snapshot necessary.
-In the container, run <code>batch_run.py</code> after activating the virtualenv. Results are in <code>results.json</code> once the benchmark completes.</p>
-
-<p>The benchmarks take a long time and a <em>lot</em> of RAM in any but the largest of clusters, beware.</p>
-
 <h4>
 <a id="known-issues" class="anchor" href="#known-issues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Known Issues</h4>
 
@@ -107,12 +137,15 @@ In the container, run <code>batch_run.py</code> after activating the virtualenv.
 </code></pre>
 
 <p>The latest version of Z3 does support this, but some previous version does not.</p>
-      </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/hrishioa/Oyente">Oyente</a> is maintained by <a href="https://github.com/hrishioa">hrishioa</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+    </section>
+
+  
   </body>
 </html>
